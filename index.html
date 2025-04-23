@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet-Friendly City - Making Cities Paw-some!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Pet-Friendly City</div>
+        <div class="hamburger" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#volunteer">Volunteer</a></li>
+            <li><a href="#stories">Impact Stories</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Making Cities Paw-some! 🐾✨</h1>
+            <p>Join us in creating pet-friendly spaces for everyone</p>
+            <button class="cta-button">Join the Movement</button>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Pet-Friendly City</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>We're on a mission to transform cities into havens where pets and their humans can thrive together. Our initiative focuses on:</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-paw"></i> Creating more pet-friendly parks</li>
+                        <li><i class="fas fa-heart"></i> Supporting pet-friendly businesses</li>
+                        <li><i class="fas fa-home"></i> Advocating for pet-inclusive housing</li>
+                        <li><i class="fas fa-medal"></i> Organizing pet-friendly events</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1" alt="Happy dog in park">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="volunteer" class="volunteer-section">
+        <h2>Become a Volunteer</h2>
+        <form id="volunteerForm" class="volunteer-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" placeholder="Enter your city" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role Preference:</label>
+                <select id="role" required>
+                    <option value="">Select a role</option>
+                    <option value="pet-sitter">Pet Sitter</option>
+                    <option value="event-coordinator">Event Coordinator</option>
+                    <option value="social-media">Social Media Manager</option>
+                    <option value="community-organizer">Community Organizer</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </section>
+
+    <section id="stories" class="stories-section">
+        <div class="container">
+            <h2>Impact Stories</h2>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b" alt="Park Transformation">
+                    <h3>Central Park Transformation</h3>
+                    <p>From a regular park to a pet paradise - see how we transformed Central Park with dedicated play areas and water stations.</p>
+                    <span class="impact-number">2000+ dogs visit monthly</span>
+                </div>
+                <div class="story-card">
+                    <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&w=800&q=80" alt="Pet Cafe Story">
+                    <h3>Paw-fect Cafes</h3>
+                    <p>Our initiative helped 50+ cafes become pet-friendly, creating new social spaces for pet owners.</p>
+                    <span class="impact-number">50+ pet-friendly cafes</span>
+                </div>
+                <div class="story-card">
+                    <img src="https://images.unsplash.com/photo-1593871075120-982e042088d8" alt="Adoption Success">
+                    <h3>Adoption Drive Success</h3>
+                    <p>Our community events have helped hundreds of pets find their forever homes.</p>
+                    <span class="impact-number">300+ successful adoptions</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map-section" class="map-section">
+        <div class="container">
+            <h2>Pet-Friendly Places Near You</h2>
+            <div class="map-controls">
+                <div class="search-box">
+                    <input type="text" id="location-search" placeholder="Search for a location...">
+                    <button onclick="searchLocation()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="map-filters">
+                    <button class="filter-btn active" data-type="all">All Places</button>
+                    <button class="filter-btn" data-type="parks">Parks</button>
+                    <button class="filter-btn" data-type="cafes">Cafes</button>
+                    <button class="filter-btn" data-type="vets">Vet Clinics</button>
+                    <button class="filter-btn" data-type="stores">Pet Stores</button>
+                </div>
+            </div>
+            <div class="map-container">
+                <div id="map"></div>
+                <div class="location-list">
+                    <h3>Nearby Pet-Friendly Places</h3>
+                    <div id="locations-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="events-section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Pet Events</h2>
+            <div class="events-grid">
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-4.0.3" alt="Pet Adoption Day" class="event-image">
+                    <div class="event-content">
+                        <span class="event-date">May 15, 2025</span>
+                        <h3 class="event-title">Pet Adoption Day</h3>
+                        <p class="event-description">Join us for a special day of pet adoptions. Meet adorable pets looking for their forever homes!</p>
+                        <div class="event-footer">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Central Park</span>
+                            </div>
+                            <button class="event-rsvp">RSVP Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?ixlib=rb-4.0.3" alt="Pet Training Workshop" class="event-image">
+                    <div class="event-content">
+                        <span class="event-date">June 1, 2025</span>
+                        <h3 class="event-title">Pet Training Workshop</h3>
+                        <p class="event-description">Learn essential training techniques from professional trainers. Perfect for new pet owners!</p>
+                        <div class="event-footer">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Pet Education Center</span>
+                            </div>
+                            <button class="event-rsvp">RSVP Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1577175889968-f551f5944abd?ixlib=rb-4.0.3" alt="Pet Health Check" class="event-image">
+                    <div class="event-content">
+                        <span class="event-date">June 20, 2025</span>
+                        <h3 class="event-title">Free Pet Health Check</h3>
+                        <p class="event-description">Get your pets checked by our experienced veterinarians. Free vaccinations available!</p>
+                        <div class="event-footer">
+                            <div class="event-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>City Vet Clinic</span>
+                            </div>
+                            <button class="event-rsvp">RSVP Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources" class="resources-section">
+        <div class="container">
+            <h2>Pet Care Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <i class="fas fa-book-medical"></i>
+                    <h3>Pet Health Guide</h3>
+                    <p>Essential tips for keeping your pets healthy and happy.</p>
+                    <button class="resource-btn" data-resource="health">Learn More</button>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-dog"></i>
+                    <h3>Training Tips</h3>
+                    <p>Professional advice for training your furry friends.</p>
+                    <button class="resource-btn" data-resource="training">Learn More</button>
+                </div>
+                <div class="resource-card">
+                    <i class="fas fa-home"></i>
+                    <h3>Pet-Friendly Housing</h3>
+                    <p>Find pet-friendly apartments and housing options.</p>
+                    <button class="resource-btn" data-resource="housing">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="chat-widget">
+        <div class="chat-icon">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3>CollegeTips Chat</h3>
+                <button class="close-chat">&times;</button>
+            </div>
+            <div class="chat-messages"></div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message...">
+                <button>Send</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>123 Pet Street, Pawsome City</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <p>info@petfriendlycity.com</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/tanmay-jadhav-795a96293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/Tanmayjadhav2305" class="social-icon" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Subject" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Pet-Friendly City</h3>
+                    <p>Making cities more welcoming for our furry friends.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#volunteer">Volunteer</a></li>
+                        <li><a href="#stories">Success Stories</a></li>
+                        <li><a href="#events">Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Stay Updated</h4>
+                    <p>Subscribe to our newsletter for pet-friendly tips and updates.</p>
+                    <input type="email" placeholder="Enter your email">
+                    <button>Subscribe</button>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pet-Friendly City. All rights reserved. Developed by <span class="developer">Tanmay Jadhav</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
