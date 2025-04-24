@@ -4,6 +4,9 @@
 
 This project was developed as part of the Web Development Internship program at collegetips.in. It showcases a modern, responsive website designed to promote and support pet-friendly communities.
 
+### Live demo 🌐 
+https://tanmayjadhav2305.github.io/Pet-friendly-City/
+
 ### 🚀 Project Overview
 
 The Pet-Friendly City website is a dynamic web application that helps connect pet owners with pet-friendly locations, services, and communities. Built with modern web technologies, it demonstrates proficiency in front-end web development.
